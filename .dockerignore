@@ -1,0 +1,9 @@
+.DS_Store
+.dockerignore
+.sonarlint
+.vscode
+Dockerfile
+LICENSE
+Makefile
+README.md
+VERSION
