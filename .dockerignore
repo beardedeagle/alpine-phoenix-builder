@@ -1,5 +1,7 @@
-.DS_Store
 .dockerignore
+.DS_Store
+.git
+.gitignore
 .sonarlint
 .vscode
 Dockerfile

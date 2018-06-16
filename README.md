@@ -23,15 +23,15 @@ For your own application:
 
 ```dockerfile
 FROM beardedeagle/alpine-phoenix-builder:1.6.5 as builder
-ENV app_folder /opt/test_app
-WORKDIR ${app_folder}
-COPY . ${app_folder}
+ENV appdir /opt/test_app
+WORKDIR ${appdir}
+COPY . ${appdir}
 RUN mix deps.get --only prod \
   && MIX_ENV=prod mix compile \
   && cd assets \
   && npm install \
   && node node_modules/brunch/bin/brunch build --production \
-  && cd ${app_folder} \
+  && cd ${appdir} \
   && MIX_ENV=prod mix phx.digest \
   && MIX_ENV=prod mix release --env=prod
 
@@ -47,3 +47,10 @@ RUN apk add --no-cache bash openssl \
   && rm -rf /var/cache/apk/*
 CMD ["bin/test_app", "foreground"]
 ```
+
+## History
+
+The code provided by PR [#1][1] is MIT licensed by GoDaddy. Any code changes after that are MIT
+licensed by the repository owner.
+
+[1]: https://github.com/beardedeagle/alpine-phoenix-builder/pull/1

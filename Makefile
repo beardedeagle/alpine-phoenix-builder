@@ -1,4 +1,5 @@
 .PHONY: help test iex shell build clean rebuild release
+.NOTPARALLEL: rebuild release
 
 VERSION ?= `cat VERSION`
 MAJ_VERSION := $(shell echo $(VERSION) | sed 's/\([0-9][0-9]*\)\.\([0-9][0-9]*\)\(\.[0-9][0-9]*\)*/\1/')
@@ -31,4 +32,5 @@ rebuild: ## Rebuild the Docker image
 release: ## Rebuild and release the Docker image to Docker Hub
 	build
 	docker push $(IMAGE_NAME):$(VERSION)
+	docker push $(IMAGE_NAME):$(MIN_VERSION)
 	docker push $(IMAGE_NAME):latest
