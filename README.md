@@ -12,17 +12,17 @@ the user of this image will implement proper security practices themselves.
 To boot straight to a iex prompt in the image:
 
 ```shell
-$ docker run --rm -i -t beardedeagle/alpine-phoenix-builder iex --erl "+K true"
-Erlang/OTP 20 [erts-9.3.3] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:10] [hipe] [kernel-poll:true]
+$ docker run --rm -i -t beardedeagle/alpine-phoenix-builder iex
+Erlang/OTP 21 [erts-10.0] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [hipe]
 
-Interactive Elixir (1.6.5) - press Ctrl+C to exit (type h() ENTER for help)
+Interactive Elixir (1.6.6) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
 
 For your own application:
 
 ```dockerfile
-FROM beardedeagle/alpine-phoenix-builder:1.6.5 as builder
+FROM beardedeagle/alpine-phoenix-builder:1.6.6 as builder
 ENV appdir /opt/test_app
 WORKDIR ${appdir}
 COPY . ${appdir}
