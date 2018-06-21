@@ -5,11 +5,11 @@ LABEL maintainer="beardedeagle <randy@heroictek.com>"
 # Important!  Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images.
-ENV REFRESHED_AT=2018-06-20 \
+ENV REFRESHED_AT=2018-06-21 \
   OTP_VER=21.0 \
   ELIXIR_VER=1.6.6 \
   MIX_HOME=/usr/local/lib/elixir/.mix \
-  NODE_VER=10.4.1 \
+  NODE_VER=10.5.0 \
   NPM_VER=6.1.0 \
   LANG=C.UTF-8
 
@@ -140,6 +140,7 @@ RUN set -xe \
     B9AE9905FFD7803F25714661B63B535A4C206CA9 \
     56730D5401028683275BD23C23EFEFE93C4CFFFE \
     77984A986EBC2AA786BC0F66B01FBB92821C587A \
+    8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600 \
   ; do \
     gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
     gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
