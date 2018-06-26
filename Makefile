@@ -13,11 +13,11 @@ help:
 
 ## Test the Docker image
 test:
-	docker run --rm -it $(IMAGE_NAME):$(VERSION) elixir -version
+	docker run --rm -it $(IMAGE_NAME):$(VERSION) elixir --version
 
 ## Run an iex shell in the image
 iex:
-	docker run --rm -it $(IMAGE_NAME):$(VERSION) iex --erl "+K true"
+	docker run --rm -it $(IMAGE_NAME):$(VERSION) iex
 
 ## Boot to a shell prompt
 shell:
