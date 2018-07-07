@@ -1,8 +1,8 @@
 # Docker + Alpine + Elixir && Phoenix = Love
 
 This Dockerfile provides a good base build image to use in multistage builds for Elixir and Phoenix apps.
-It comes with the latest version of Erlang, Elixir, Rebar, Hex, NodeJS and NPM. It is intended for use
-in creating release images with or for your application.
+It comes with the latest version of Alpine, Erlang, Elixir, Rebar, Hex, NodeJS and NPM. It is intended for
+use in creating release images with or for your application.
 
 No effort has been made to make this image suitable to run in unprivileged environments. It is expected
 the user of this image will implement proper security practices themselves.
@@ -35,12 +35,12 @@ RUN mix deps.get --only prod \
   && MIX_ENV=prod mix phx.digest \
   && MIX_ENV=prod mix release --env=prod
 
-FROM alpine:3.7
+FROM alpine:3.8
 EXPOSE 4000
 ENV appver 0.0.1
 WORKDIR /opt/test_app
 COPY --from=builder /opt/test_app/_build/prod/rel/test_app/releases/${appver}/test_app.tar.gz .
-RUN apk add --no-cache bash openssl \
+RUN apk add --no-cache bash libressl \
   && tar -xzvf test_app.tar.gz \
   && rm -rf test_app.tar.gz \
   && rm -rf /root/.cache \
