@@ -1,11 +1,11 @@
-FROM alpine:3.7 as base_stage
+FROM alpine:3.8 as base_stage
 
 LABEL maintainer="beardedeagle <randy@heroictek.com>"
 
 # Important!  Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images.
-ENV REFRESHED_AT=2018-07-05 \
+ENV REFRESHED_AT=2018-07-06 \
   OTP_VER=21.0.2 \
   ELIXIR_VER=1.6.6 \
   MIX_HOME=/usr/local/lib/elixir/.mix \
@@ -19,7 +19,7 @@ RUN set -xe \
     bash \
     libstdc++ \
     lksctp-tools \
-    openssl \
+    libressl \
   && rm -rf /root/.cache \
   && rm -rf /var/cache/apk/*
 
@@ -44,7 +44,7 @@ RUN set -xe \
     linux-headers \
     lksctp-tools-dev \
     make \
-    openssl-dev \
+    libressl-dev \
     python \
     rsync \
     tar \
