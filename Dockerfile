@@ -5,9 +5,9 @@ LABEL maintainer="beardedeagle <randy@heroictek.com>"
 # Important!  Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images.
-ENV REFRESHED_AT=2018-07-18 \
+ENV REFRESHED_AT=2018-07-26 \
   OTP_VER=21.0.3 \
-  ELIXIR_VER=1.6.6 \
+  ELIXIR_VER=1.7.0 \
   MIX_HOME=/usr/local/lib/elixir/.mix \
   NODE_VER=10.7.0 \
   NPM_VER=6.2.0 \
@@ -107,7 +107,7 @@ FROM erlang_stage as elixir_stage
 
 RUN set -xe \
   && ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/archive/v${ELIXIR_VER}.tar.gz" \
-  && ELIXIR_DOWNLOAD_SHA256="74507b0646bf485ee3af0e7727e3fdab7123f1c5ecf2187a52a928ad60f93831" \
+  && ELIXIR_DOWNLOAD_SHA256="791f726f7e3bb05a4620beb6191f2d758332ea7a169861b03580a16022c49a75" \
   && curl -fSL -o elixir-src.tar.gz "$ELIXIR_DOWNLOAD_URL" \
   && echo "$ELIXIR_DOWNLOAD_SHA256  elixir-src.tar.gz" | sha256sum -c - \
   && export ELIXIR_TOP="/usr/src/elixir_src_${ELIXIR_VER%%@*}" \
