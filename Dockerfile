@@ -5,12 +5,12 @@ LABEL maintainer="beardedeagle <randy@heroictek.com>"
 # Important!  Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images.
-ENV REFRESHED_AT=2018-08-01 \
+ENV REFRESHED_AT=2018-08-01a \
   OTP_VER=21.0.4 \
   ELIXIR_VER=1.7.1 \
   MIX_HOME=/usr/local/lib/elixir/.mix \
   NODE_VER=10.8.0 \
-  NPM_VER=6.2.0 \
+  NPM_VER=6.3.0 \
   LANG=C.UTF-8
 
 RUN set -xe \
