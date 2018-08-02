@@ -13,7 +13,7 @@ Elixir 1.7.1
 Rebar 3.6.1
 Hex 0.18.1
 Nodejs 10.8.0
-NPM 6.2.0
+NPM 6.3.0
 ```
 
 ## Usage
