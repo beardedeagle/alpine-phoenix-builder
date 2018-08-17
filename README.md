@@ -12,8 +12,8 @@ OTP/Erlang 21.0.5
 Elixir 1.7.2
 Rebar 3.6.1
 Hex 0.18.1
-Nodejs 10.8.0
-NPM 6.3.0
+Nodejs 10.9.0
+NPM 6.4.0
 ```
 
 ## Usage
