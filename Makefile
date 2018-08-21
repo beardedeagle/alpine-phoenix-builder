@@ -2,8 +2,6 @@
 .NOTPARALLEL: rebuild release
 
 VERSION ?= `cat VERSION`
-MAJ_VERSION := $(shell echo $(VERSION) | sed 's/\([0-9][0-9]*\)\.\([0-9][0-9]*\)\(\.[0-9][0-9]*\)*/\1/')
-MIN_VERSION := $(shell echo $(VERSION) | sed 's/\([0-9][0-9]*\)\.\([0-9][0-9]*\)\(\.[0-9][0-9]*\)*/\1.\2/')
 IMAGE_NAME ?= beardedeagle/alpine-phoenix-builder
 
 ## Print out Docker image name and version
@@ -25,11 +23,11 @@ shell:
 
 ## Build the Docker image
 build:
-	docker build --force-rm -t $(IMAGE_NAME):$(VERSION) -t $(IMAGE_NAME):$(MIN_VERSION) -t $(IMAGE_NAME):$(MAJ_VERSION) -t $(IMAGE_NAME):latest .
+	docker build --force-rm -t $(IMAGE_NAME):$(VERSION) -t $(IMAGE_NAME):latest .
 
 ## Clean up generated images
 clean:
-	@docker rmi --force $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MIN_VERSION) $(IMAGE_NAME):$(MAJ_VERSION) $(IMAGE_NAME):latest
+	@docker rmi --force $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):latest
 
 ## Rebuild the Docker image
 rebuild: clean build
@@ -37,5 +35,4 @@ rebuild: clean build
 ## Rebuild and release the Docker image to Docker Hub
 release: build
 	docker push $(IMAGE_NAME):$(VERSION)
-	docker push $(IMAGE_NAME):$(MIN_VERSION)
 	docker push $(IMAGE_NAME):latest
