@@ -5,7 +5,9 @@ LABEL maintainer="beardedeagle <randy@heroictek.com>"
 # Important!  Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images.
-ENV REFRESHED_AT=2018-08-20 \
+ENV REFRESHED_AT=2018-08-24 \
+  MIX_HOME=/usr/local/lib/elixir/.mix \
+  TERM=xterm \
   LANG=C.UTF-8
 
 RUN set -xe \
@@ -23,9 +25,9 @@ FROM base_stage as deps_stage
 RUN set -xe \
   && apk add --no-cache --virtual .build-deps rsync
 
-FROM beardedeagle/alpine-elixir-builder as elixir_stage
+FROM beardedeagle/alpine-elixir-builder:1.7.2 as elixir_stage
 
-FROM beardedeagle/alpine-node-builder as node_stage
+FROM beardedeagle/alpine-node-builder:10.9.0 as node_stage
 
 FROM deps_stage as stage
 
