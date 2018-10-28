@@ -9,10 +9,10 @@ No effort has been made to make this image suitable to run in unprivileged envir
 ```shell
 Alpine 3.8
 OTP/Erlang 21.1.1
-Elixir 1.7.3
+Elixir 1.7.4
 Rebar 3.6.2
 Hex 0.18.1
-Nodejs 10.12.0
+Nodejs 11.0.0
 NPM 6.4.1
 ```
 
@@ -24,14 +24,14 @@ To boot straight to a iex prompt in the image:
 $ docker run --rm -i -t beardedeagle/alpine-phoenix-builder iex
 Erlang/OTP 21 [erts-10.1.1] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [hipe]
 
-Interactive Elixir (1.7.3) - press Ctrl+C to exit (type h() ENTER for help)
+Interactive Elixir (1.7.4) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
 
 For your own application:
 
 ```dockerfile
-FROM beardedeagle/alpine-phoenix-builder:1.7.3 as builder
+FROM beardedeagle/alpine-phoenix-builder:1.7.4 as builder
 ENV appdir /opt/test_app
 WORKDIR ${appdir}
 COPY . ${appdir}
