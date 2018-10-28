@@ -4,6 +4,7 @@
 .gitignore
 .sonarlint
 .vscode
+dive.log
 Dockerfile
 LICENSE
 Makefile
