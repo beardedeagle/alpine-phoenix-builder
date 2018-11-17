@@ -8,11 +8,11 @@ No effort has been made to make this image suitable to run in unprivileged envir
 
 ```shell
 Alpine 3.8
-OTP/Erlang 21.1.1
+OTP/Erlang 21.1.2
 Elixir 1.7.4
 Rebar 3.6.2
-Hex 0.18.1
-Nodejs 11.0.0
+Hex 0.18.2
+Nodejs 11.2.0
 NPM 6.4.1
 ```
 
@@ -22,7 +22,7 @@ To boot straight to a iex prompt in the image:
 
 ```shell
 $ docker run --rm -i -t beardedeagle/alpine-phoenix-builder iex
-Erlang/OTP 21 [erts-10.1.1] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [hipe]
+Erlang/OTP 21 [erts-10.1.2] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [hipe]
 
 Interactive Elixir (1.7.4) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
@@ -39,7 +39,7 @@ RUN mix deps.get --only prod \
   && MIX_ENV=prod mix compile \
   && cd assets \
   && npm install \
-  && node node_modules/brunch/bin/brunch build --production \
+  && node node_modules/webpack/bin/webpack.js --mode production \
   && cd ${appdir} \
   && MIX_ENV=prod mix phx.digest \
   && MIX_ENV=prod mix release --env=prod
