@@ -46,7 +46,7 @@ RUN mix deps.get --only prod \
 
 FROM alpine:3.8
 EXPOSE 4000
-ENV appver 0.0.1
+ENV appver 0.1.0
 WORKDIR /opt/test_app
 COPY --from=builder /opt/test_app/_build/prod/rel/test_app/releases/${appver}/test_app.tar.gz .
 RUN apk add --no-cache bash libressl \
