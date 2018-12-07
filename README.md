@@ -12,7 +12,7 @@ OTP/Erlang 21.1.4
 Elixir 1.7.4
 Rebar 3.7.5
 Hex 0.18.2
-Nodejs 11.3.0
+Nodejs 11.4.0
 NPM 6.4.1
 ```
 
