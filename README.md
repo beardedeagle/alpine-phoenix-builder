@@ -8,7 +8,7 @@ No effort has been made to make this image suitable to run in unprivileged envir
 
 ```shell
 Alpine 3.8
-OTP/Erlang 21.2.1
+OTP/Erlang 21.2.2
 Elixir 1.7.4
 Rebar 3.7.5
 Hex 0.18.2
