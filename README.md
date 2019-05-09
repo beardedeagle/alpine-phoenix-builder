@@ -7,13 +7,13 @@ No effort has been made to make this image suitable to run in unprivileged envir
 ## Software/Language Versions
 
 ```shell
-Alpine 3.8
-OTP/Erlang 21.2.3
-Elixir 1.8.0
-Rebar 3.8.0
+Alpine 3.9
+OTP/Erlang 21.3.8
+Elixir 1.8.1
+Rebar 3.10.0
 Hex 0.19.0
-Nodejs 11.7.0
-NPM 6.6.0
+Nodejs 12.2.0
+NPM 6.9.0
 ```
 
 ## Usage
@@ -22,16 +22,16 @@ To boot straight to a iex prompt in the image:
 
 ```shell
 $ docker run --rm -i -t beardedeagle/alpine-phoenix-builder iex
-Erlang/OTP 21 [erts-10.2.2] [source] [64-bit] [smp:6:6] [ds:6:6:10] [async-threads:1] [hipe]
+Erlang/OTP 21 [erts-10.3.5] [source] [64-bit] [smp:6:6] [ds:6:6:10] [async-threads:1] [hipe]
 
-Interactive Elixir (1.8.0) - press Ctrl+C to exit (type h() ENTER for help)
+Interactive Elixir (1.8.1) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
 
 For your own application:
 
 ```dockerfile
-FROM beardedeagle/alpine-phoenix-builder:1.8.0 as builder
+FROM beardedeagle/alpine-phoenix-builder:1.8.1 as builder
 ENV appdir /opt/test_app
 WORKDIR ${appdir}
 COPY . ${appdir}
@@ -44,7 +44,7 @@ RUN mix deps.get --only prod \
   && MIX_ENV=prod mix phx.digest \
   && MIX_ENV=prod mix release --env=prod
 
-FROM alpine:3.8
+FROM alpine:3.9
 EXPOSE 4000
 ENV appver 0.1.0
 WORKDIR /opt/test_app
