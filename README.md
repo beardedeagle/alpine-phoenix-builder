@@ -1,6 +1,6 @@
 # Docker + Alpine + Elixir && Phoenix = Love
 
-This Dockerfile provides a good base build image to use in multistage builds for Elixir and Phoenix apps. It comes with the latest version of Alpine, Erlang, Elixir, Rebar, Hex, NodeJS and NPM. It is intended for use in creating release images with or for your application and allows you to avoid cross-compiling releases. The exception of course is if your app has NIFs which require a native compilation toolchain, but that is left as an exercise let to the user.
+This Dockerfile provides a good base build image to use in multistage builds for Elixir and Phoenix apps. It comes with the latest version of Alpine, Erlang, Elixir, Rebar, Hex, NodeJS and NPM. It is intended for use in creating release images with or for your application and allows you to avoid cross-compiling releases. The exception of course is if your app has NIFs which require a native compilation toolchain, but that is an exercise left to the user.
 
 No effort has been made to make this image suitable to run in unprivileged environments. The repository owner is not responsible for any losses that result from improper usage or security practices, as it is expected that the user of this image will implement proper security practices themselves.
 
@@ -8,7 +8,7 @@ No effort has been made to make this image suitable to run in unprivileged envir
 
 ```shell
 Alpine 3.9
-OTP/Erlang 22.0
+OTP/Erlang 22.0.1
 Elixir 1.8.2
 Rebar 3.10.0
 Hex 0.19.0
