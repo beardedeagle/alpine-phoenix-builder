@@ -7,12 +7,12 @@ No effort has been made to make this image suitable to run in unprivileged envir
 ## Software/Language Versions
 
 ```shell
-Alpine 3.9
-OTP/Erlang 22.0.1
-Elixir 1.8.2
-Rebar 3.10.0
-Hex 0.19.0
-Nodejs 12.2.0
+Alpine 3.9.4
+OTP/Erlang 22.0.4
+Elixir 1.9.0
+Rebar 3.11.1
+Hex 0.20.1
+Nodejs 12.4.0
 NPM 6.9.0
 ```
 
@@ -22,16 +22,48 @@ To boot straight to a iex prompt in the image:
 
 ```shell
 $ docker run --rm -i -t beardedeagle/alpine-phoenix-builder iex
-Erlang/OTP 22 [erts-10.4] [source] [64-bit] [smp:6:6] [ds:6:6:10] [async-threads:1] [hipe]
+Erlang/OTP 22 [erts-10.4.3] [source] [64-bit] [smp:4:4] [ds:4:4:10] [async-threads:1] [hipe]
 
-Interactive Elixir (1.8.2) - press Ctrl+C to exit (type h() ENTER for help)
+Interactive Elixir (1.9.0) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
 
 For your own application:
 
+- Using Elixir releases
+
 ```dockerfile
-FROM beardedeagle/alpine-phoenix-builder:1.8.2 as builder
+FROM beardedeagle/alpine-phoenix-builder:1.9.0 as builder
+ENV appdir /opt/test_app
+WORKDIR ${appdir}
+COPY . ${appdir}
+RUN mix deps.get --only prod \
+  && MIX_ENV=prod mix compile \
+  && cd assets \
+  && npm install \
+  && node node_modules/webpack/bin/webpack.js --mode production \
+  && cd ${appdir} \
+  && MIX_ENV=prod mix phx.digest \
+  && MIX_ENV=prod mix release \
+  && V=0.1.0; pushd _build/prod/rel; tar -czvf ${appdir}/test_app-${V}.tar.gz test_app; popd;
+
+FROM alpine:3.9.4
+EXPOSE 4000
+ENV appver 0.1.0
+WORKDIR /opt/test_app
+COPY --from=builder /opt/test_app/test_app-${appver}.tar.gz .
+RUN apk add --no-cache bash libressl \
+  && tar -xzvf test_app-${appver}.tar.gz \
+  && rm -rf test_app-${appver}.tar.gz \
+  && rm -rf /root/.cache \
+  && rm -rf /var/cache/apk/*
+CMD ["bin/test_app", "start"]
+```
+
+- Using Distillery
+
+```dockerfile
+FROM beardedeagle/alpine-phoenix-builder:1.9.0 as builder
 ENV appdir /opt/test_app
 WORKDIR ${appdir}
 COPY . ${appdir}
@@ -44,7 +76,7 @@ RUN mix deps.get --only prod \
   && MIX_ENV=prod mix phx.digest \
   && MIX_ENV=prod mix release --env=prod
 
-FROM alpine:3.9
+FROM alpine:3.9.4
 EXPOSE 4000
 ENV appver 0.1.0
 WORKDIR /opt/test_app
