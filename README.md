@@ -7,13 +7,13 @@ No effort has been made to make this image suitable to run in unprivileged envir
 ## Software/Language Versions
 
 ```shell
-Alpine 3.10.1
+Alpine 3.10.2
 OTP/Erlang 22.0.7
 Elixir 1.9.1
-Rebar 3.11.1
+Rebar 3.12.0
 Hex 0.20.1
-Nodejs 12.9.0
-NPM 6.11.1
+Nodejs 12.9.1
+NPM 6.11.2
 ```
 
 ## Usage
@@ -47,7 +47,7 @@ RUN mix deps.get --only prod \
   && MIX_ENV=prod mix release \
   && V=0.1.0; pushd _build/prod/rel; tar -czvf ${appdir}/test_app-${V}.tar.gz test_app; popd;
 
-FROM alpine:3.10.1
+FROM alpine:3.10.2
 EXPOSE 4000
 ENV appver 0.1.0
 WORKDIR /opt/test_app
@@ -76,7 +76,7 @@ RUN mix deps.get --only prod \
   && MIX_ENV=prod mix phx.digest \
   && MIX_ENV=prod mix release --env=prod
 
-FROM alpine:3.10.1
+FROM alpine:3.10.2
 EXPOSE 4000
 ENV appver 0.1.0
 WORKDIR /opt/test_app
