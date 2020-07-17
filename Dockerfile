@@ -1,11 +1,11 @@
-FROM alpine:3.11.3 as base_stage
+FROM alpine:3.12.0 as base_stage
 
 LABEL maintainer="beardedeagle <randy@heroictek.com>"
 
 # Important!  Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images.
-ENV REFRESHED_AT=2020-01-29 \
+ENV REFRESHED_AT=2020-07-17 \
   MIX_HOME=/usr/local/lib/elixir/.mix \
   TERM=xterm \
   LANG=C.UTF-8
@@ -25,9 +25,9 @@ FROM base_stage as deps_stage
 RUN set -xe \
   && apk add --no-cache --virtual .build-deps rsync
 
-FROM beardedeagle/alpine-elixir-builder:1.10.0 as elixir_stage
+FROM beardedeagle/alpine-elixir-builder:1.10.4 as elixir_stage
 
-FROM beardedeagle/alpine-node-builder:13.7.0 as node_stage
+FROM beardedeagle/alpine-node-builder:14.5.0 as node_stage
 
 FROM deps_stage as stage
 
