@@ -4,9 +4,11 @@
 .gitignore
 .sonarlint
 .vscode
+CONTRIBUTORS.md
 dive.log
 Dockerfile
 LICENSE
 Makefile
 README.md
+slim.report.json
 VERSION
