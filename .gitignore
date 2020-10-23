@@ -2,3 +2,4 @@
 .sonarlint
 .vscode
 dive.log
+slim.report.json
