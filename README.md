@@ -7,14 +7,14 @@ No effort has been made to make this image suitable to run in unprivileged envir
 ## Software/Language Versions
 
 ```shell
-Alpine 3.12.1
-OTP/Erlang 23.1.2
-Elixir 1.11.2
-Rebar 3.14.1
-Hex 0.20.6
-Nodejs 15.1.0
-NPM 7.0.8
-Git 2.26.2
+Alpine 3.13.1
+OTP/Erlang 23.2.3
+Elixir 1.11.3
+Rebar 3.14.3
+Hex 0.21.1
+Nodejs 15.8.0
+NPM 7.5.2
+Git 2.30.0
 ```
 
 ## Usage
@@ -23,9 +23,9 @@ To boot straight to a iex prompt in the image:
 
 ```shell
 $ docker run --rm -i -t beardedeagle/alpine-phoenix-builder iex
-Erlang/OTP 23 [erts-11.1.2] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-threads:1]
+Erlang/OTP 23 [erts-11.1.7] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-threads:1]
 
-Interactive Elixir (1.11.2) - press Ctrl+C to exit (type h() ENTER for help)
+Interactive Elixir (1.11.3) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
 
@@ -34,7 +34,7 @@ For your own application:
 - Using Elixir releases
 
 ```dockerfile
-FROM beardedeagle/alpine-phoenix-builder:1.11.2 as builder
+FROM beardedeagle/alpine-phoenix-builder:1.11.3 as builder
 ENV appdir /opt/test_app
 WORKDIR ${appdir}
 COPY . ${appdir}
@@ -48,7 +48,7 @@ RUN mix deps.get --only prod \
   && MIX_ENV=prod mix release \
   && V=0.1.0; pushd _build/prod/rel; tar -czvf ${appdir}/test_app-${V}.tar.gz test_app; popd;
 
-FROM alpine:3.12.1
+FROM alpine:3.13.1
 EXPOSE 4000
 ENV appver 0.1.0
 WORKDIR /opt/test_app
@@ -64,7 +64,7 @@ CMD ["bin/test_app", "start"]
 - Using Distillery
 
 ```dockerfile
-FROM beardedeagle/alpine-phoenix-builder:1.11.2 as builder
+FROM beardedeagle/alpine-phoenix-builder:1.11.3 as builder
 ENV appdir /opt/test_app
 WORKDIR ${appdir}
 COPY . ${appdir}
@@ -77,7 +77,7 @@ RUN mix deps.get --only prod \
   && MIX_ENV=prod mix phx.digest \
   && MIX_ENV=prod mix release --env=prod
 
-FROM alpine:3.12.1
+FROM alpine:3.13.1
 EXPOSE 4000
 ENV appver 0.1.0
 WORKDIR /opt/test_app
